@@ -1,0 +1,16 @@
+---
+title: "Low Tide, Tofino"
+excerpt: "The rocks are the same every low tide. The light never is."
+date: 2025-10-04
+tag: "Landscape"
+photos:
+  - src: "/photos/05-12.jpg"
+    alt: "A cluster of dark rocks on a sandy beach at low tide, with a calm sea and forested headland in the distance."
+    orientation: landscape
+    credit: "Paul Jarvis"
+    creditUrl: "https://unsplash.com/photos/I_9ILwtsl_k"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+Went down before the light got good and ended up staying long after it did. The tide was out far enough to walk past the rocks, but I never made it — the rocks were the whole reason I came.

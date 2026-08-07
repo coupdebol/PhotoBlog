@@ -1,0 +1,16 @@
+---
+title: "Not Yet Ripe"
+excerpt: "Two weeks too early, according to the vineyard. I went back later for the harvest, but I like this version better."
+date: 2026-06-11
+tag: "Details"
+photos:
+  - src: "/photos/25-75.jpg"
+    alt: "Clusters of unripe green-blue grapes hanging on the vine."
+    orientation: portrait
+    credit: "Jassy Onyae"
+    creditUrl: "https://unsplash.com/photos/1gBUXhf0PtA"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+The harvest photos are technically the 'better' set. These are the ones I actually go back to.

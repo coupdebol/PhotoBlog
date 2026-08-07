@@ -1,0 +1,155 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formatted = post.data.date.toLocaleDateString('en-US', {
+  month: 'long',
+  day: '2-digit',
+  year: 'numeric',
+});
+---
+
+<BaseLayout title={`${post.data.title} — Beautiful Blog`} description={post.data.excerpt}>
+  <Header />
+
+  <main>
+    <div class="container-wide back-row">
+      <a class="back" href="/">← Back to the index</a>
+    </div>
+
+    <article class="article">
+      <div class="container article__head">
+        <h1>{post.data.title}</h1>
+        <div class="article__meta">
+          <span class="meta">{formatted}</span>
+          <span class="tag">{post.data.tag}</span>
+        </div>
+      </div>
+
+      <div class="container-wide article__photos">
+        {
+          post.data.photos.map((photo) => (
+            <figure class="photo" data-orientation={photo.orientation}>
+              <img
+                class="lightbox-trigger"
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                data-credit={photo.credit}
+                data-credit-url={photo.creditUrl}
+              />
+              <figcaption class="meta">
+                Photo: <a href={photo.creditUrl} target="_blank" rel="noopener noreferrer">{photo.credit}</a>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+
+      <div class="container article__body">
+        <Content />
+      </div>
+
+      <div class="container article__end">
+        <div class="rule article__end-rule"></div>
+        <a class="back" href="/">← Back to the index</a>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .back-row {
+    padding-top: 1.6rem;
+  }
+
+  .back {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+  }
+
+  .back:hover {
+    color: var(--ink);
+  }
+
+  .article {
+    padding-block: 1.2rem 4rem;
+  }
+
+  .article__head h1 {
+    font-size: clamp(1.7rem, 3.4vw, 2.2rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .article__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .article__photos {
+    margin-block: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.6rem;
+  }
+
+  .photo {
+    margin: 0;
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .photo[data-orientation='portrait'] {
+    max-width: 640px;
+  }
+
+  .photo img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .photo figcaption {
+    margin-top: 0.55rem;
+  }
+
+  .photo figcaption a {
+    color: var(--ink-faint);
+    text-decoration: none;
+  }
+
+  .photo figcaption a:hover {
+    color: var(--accent);
+  }
+
+  .article__body {
+    font-size: 1.1rem;
+    margin-top: 2rem;
+  }
+
+  .article__body :global(p) {
+    margin: 0 0 1.4em;
+  }
+
+  .article__end-rule {
+    margin-block: 2.4rem 1.6rem;
+  }
+</style>

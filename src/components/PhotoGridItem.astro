@@ -1,0 +1,96 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  tag: string;
+  photoCount: number;
+  cover: { src: string; alt: string; orientation: 'landscape' | 'portrait' };
+}
+
+const { href, title, date, tag, photoCount, cover } = Astro.props;
+
+const formatted = date.toLocaleDateString('en-US', {
+  month: 'short',
+  day: '2-digit',
+  year: 'numeric',
+});
+---
+
+<a class="item" href={href} data-orientation={cover.orientation}>
+  <span class="item__frame">
+    <img src={cover.src} alt={cover.alt} loading="lazy" />
+    {photoCount > 1 && <span class="item__count">{photoCount} photos</span>}
+  </span>
+  <span class="item__caption">
+    <span class="item__title">{title}</span>
+    <span class="item__meta">
+      <span class="meta">{formatted}</span>
+      <span class="tag">{tag}</span>
+    </span>
+  </span>
+</a>
+
+<style>
+  .item {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 2.2rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .item__frame {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--rule-soft);
+  }
+
+  .item__frame img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.4s ease;
+  }
+
+  .item:hover .item__frame img,
+  .item:focus-visible .item__frame img {
+    transform: scale(1.02);
+  }
+
+  .item__count {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--scrim-text);
+    background: var(--scrim);
+    padding: 0.22rem 0.5rem;
+    border-radius: 2px;
+    backdrop-filter: blur(2px);
+  }
+
+  .item__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+  }
+
+  .item__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.005em;
+    line-height: 1.25;
+  }
+
+  .item__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+</style>

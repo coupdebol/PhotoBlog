@@ -1,0 +1,289 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-07T00:00:00Z",
+  "title": "Design System: Beautiful Blog",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#f6f4ee",
+        "tonalRamp": [
+          "#171611",
+          "#201f19",
+          "#2b2a22",
+          "#403e33",
+          "#59564a",
+          "#7a766a",
+          "#a8a396",
+          "#efece2"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Near-Black Ink",
+        "canonical": "#1c1b17",
+        "tonalRamp": [
+          "#0e0d0b",
+          "#1c1b17",
+          "#302f2a",
+          "#4a4841",
+          "#666257",
+          "#8c8879",
+          "#b7b1a0",
+          "#ece7d9"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#55524a",
+        "tonalRamp": [
+          "#1c1b17",
+          "#2f2d28",
+          "#403e37",
+          "#55524a",
+          "#726e62",
+          "#948f80",
+          "#b7b1a0",
+          "#d8d3c6"
+        ]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink (WCAG-corrected)",
+        "canonical": "#666257",
+        "tonalRamp": [
+          "#201f19",
+          "#332f28",
+          "#4a4638",
+          "#666257",
+          "#847e6c",
+          "#a49d88",
+          "#c4bda6",
+          "#e4ded0"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Reserved Ink-Blue",
+        "canonical": "#2f3f74",
+        "tonalRamp": [
+          "#141b30",
+          "#202b4c",
+          "#2f3f74",
+          "#3d5197",
+          "#5c74bb",
+          "#7f95d0",
+          "#a6b5e2",
+          "#d3daf3"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Hairline Rule (ink @ 14%)",
+        "canonical": "rgba(28, 27, 23, 0.14)",
+        "tonalRamp": [
+          "rgba(28,27,23,0.06)",
+          "rgba(28,27,23,0.08)",
+          "rgba(28,27,23,0.10)",
+          "rgba(28,27,23,0.12)",
+          "rgba(28,27,23,0.14)",
+          "rgba(28,27,23,0.18)",
+          "rgba(28,27,23,0.24)",
+          "rgba(28,27,23,0.32)"
+        ]
+      },
+      "scrim": {
+        "role": "neutral",
+        "displayName": "Photo Scrim (theme-invariant)",
+        "canonical": "rgba(20, 19, 15, 0.55)",
+        "tonalRamp": [
+          "rgba(20,19,15,0.85)",
+          "rgba(20,19,15,0.75)",
+          "rgba(20,19,15,0.65)",
+          "rgba(20,19,15,0.55)",
+          "rgba(20,19,15,0.45)",
+          "rgba(20,19,15,0.35)",
+          "rgba(20,19,15,0.25)",
+          "rgba(20,19,15,0.15)"
+        ]
+      },
+      "scrim-text": {
+        "role": "neutral",
+        "displayName": "Photo Scrim Text (theme-invariant)",
+        "canonical": "#f6f4ee",
+        "tonalRamp": [
+          "#171611",
+          "#403e33",
+          "#59564a",
+          "#7a766a",
+          "#a8a396",
+          "#c9c5b6",
+          "#e2ded0",
+          "#f6f4ee"
+        ]
+      },
+      "lightbox-bg": {
+        "role": "neutral",
+        "displayName": "Lightbox Scrim (theme-invariant, solid)",
+        "canonical": "#0c0b08",
+        "tonalRamp": [
+          "#050504",
+          "#0c0b08",
+          "#171611",
+          "#252319",
+          "#3a3728",
+          "#57543f",
+          "#7d7960",
+          "#a8a390"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display (Fraunces)",
+        "purpose": "Home hero, article and page h1 headings only."
+      },
+      "headline": {
+        "displayName": "Headline (Fraunces)",
+        "purpose": "Reserved headline step; grid item titles use a smaller sibling size (1.05rem) for captions under photos."
+      },
+      "body": {
+        "displayName": "Body (Newsreader)",
+        "purpose": "Long-form reading copy, bound to the 36.5em measure."
+      },
+      "label": {
+        "displayName": "Label (IBM Plex Mono)",
+        "purpose": "Dates, nav links, back-link, photo-credit captions ('Photo: {credit}') — sentence case, ink-soft/ink-faint."
+      },
+      "tag": {
+        "displayName": "Tag (IBM Plex Mono, accent)",
+        "purpose": "The single uppercase, accent-colored metadata role; used for post tags on both the index grid and the article page."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "underline-reveal",
+        "value": "background-size 0.25s ease",
+        "purpose": "Entry title hover on text lists (legacy pattern, no longer the home surface, but still valid if a text link list is used elsewhere)."
+      },
+      {
+        "name": "photo-hover-scale",
+        "value": "transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1)",
+        "purpose": "Grid cover image scales to 1.02x on hover/focus — the photo grid's only microinteraction."
+      },
+      {
+        "name": "theme-crossfade",
+        "value": "background-color 0.25s ease, color 0.25s ease",
+        "purpose": "Light/dark theme switch on body."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "grid-2col",
+        "value": "640px"
+      },
+      {
+        "name": "grid-3col",
+        "value": "1000px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Photo Grid Item",
+      "kind": "custom",
+      "refersTo": "entry-title-link",
+      "description": "Home masonry grid tile: cover photo (with optional multi-photo count badge) followed by a stacked caption — title on its own line(s), then a meta row (date + tag) directly beneath. Title never shares a baseline with meta; this fixed a finish-review defect where wrapped titles orphaned their date/tag beside only the first line. The badge's overlay colors are theme-invariant tokens (--scrim / --scrim-text), not hardcoded literals — they intentionally don't flip with light/dark mode since they sit on the photo, not page chrome.",
+      "html": "<a class=\"ds-item\" href=\"#\"><span class=\"ds-item__frame\"><img src=\"#\" alt=\"\" /><span class=\"ds-item__count\">3 photos</span></span><span class=\"ds-item__caption\"><span class=\"ds-item__title\">A short walk, longer than planned</span><span class=\"ds-item__meta\"><span class=\"ds-meta\">Aug 07, 2026</span><span class=\"ds-tag\">notes</span></span></span></a>",
+      "css": ".ds-item { display: block; text-decoration: none; color: #1c1b17; } .ds-item__frame { position: relative; display: block; overflow: hidden; background: rgba(28,27,23,0.08); } .ds-item__frame img { width: 100%; height: auto; display: block; transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); } .ds-item:hover .ds-item__frame img, .ds-item:focus-visible .ds-item__frame img { transform: scale(1.02); } .ds-item__count { position: absolute; right: 0.6rem; bottom: 0.6rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.03em; color: var(--scrim-text); background: var(--scrim); padding: 0.22rem 0.5rem; border-radius: 2px; backdrop-filter: blur(2px); } .ds-item__caption { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.7rem; } .ds-item__title { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.05rem; letter-spacing: -0.005em; line-height: 1.25; } .ds-item__meta { display: flex; align-items: center; gap: 0.6rem; } .ds-meta { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.02em; color: #666257; } .ds-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: #2f3f74; }"
+    },
+    {
+      "name": "Navigation Header",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Plain-text masthead: wordmark, two nav links, theme toggle, hairline rule beneath — now spans .container-wide (1180px) to match the grid below it, widened from the narrow .container used in the text-only build.",
+      "html": "<header class=\"ds-header\"><div class=\"ds-header__inner\"><a class=\"ds-header__mark\" href=\"#\">Beautiful Blog</a><nav class=\"ds-header__nav\"><a href=\"#\" aria-current=\"page\">Index</a><a href=\"#\">About</a><button class=\"ds-toggle\" type=\"button\">Dark</button></nav></div><div class=\"ds-rule\"></div></header>",
+      "css": ".ds-header__inner { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem 1.5rem; padding-bottom: 1.4rem; } .ds-header__mark { font-family: 'Fraunces', Georgia, serif; font-weight: 600; font-size: 1.15rem; letter-spacing: -0.01em; color: #1c1b17; text-decoration: none; } .ds-header__nav { display: flex; align-items: center; gap: 1.4rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.02em; } .ds-header__nav a { color: #55524a; text-decoration: none; } .ds-header__nav a:hover, .ds-header__nav a[aria-current='page'] { color: #1c1b17; } .ds-toggle { font: inherit; background: none; border: 1px solid rgba(28,27,23,0.14); border-radius: 3px; color: #55524a; padding: 0.3rem 0.6rem; cursor: pointer; } .ds-toggle:hover { color: #1c1b17; border-color: #666257; } .ds-toggle:focus-visible { outline: 2px solid #2f3f74; outline-offset: 3px; } .ds-rule { border: none; border-top: 1px solid rgba(28,27,23,0.14); margin: 0; }"
+    },
+    {
+      "name": "Post Photo Block",
+      "kind": "custom",
+      "refersTo": "entry-title-link",
+      "description": "Full-width photo inside a post, with a left-aligned credit caption beneath. Centered up to 1100px (landscape) or 640px (portrait) inside .container-wide. Standardized to left-aligned after a finish-review inconsistency (post page had been right-aligned, About left-aligned).",
+      "html": "<figure class=\"ds-photo\"><img src=\"#\" alt=\"\" /><figcaption class=\"ds-meta\">Photo: <a href=\"#\">Jennifer Trovato</a></figcaption></figure>",
+      "css": ".ds-photo { margin: 0; max-width: 1100px; margin-inline: auto; } .ds-photo img { width: 100%; height: auto; display: block; } .ds-photo figcaption { margin-top: 0.55rem; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; letter-spacing: 0.02em; color: #666257; } .ds-photo figcaption a { color: #666257; text-decoration: none; } .ds-photo figcaption a:hover { color: #2f3f74; }"
+    },
+    {
+      "name": "Lightbox",
+      "kind": "custom",
+      "refersTo": "lightbox-ctrl",
+      "description": "Globally-mounted fullscreen photo viewer. Scans the DOM on load for img.lightbox-trigger elements (post-page photos, About portrait) and builds its slide sequence from them in order. Opens full-viewport over a solid theme-invariant scrim (--lightbox-bg) with a dialog role; four control chips (close, prev, next, play/pause) reuse the multi-photo badge's --scrim/--scrim-text/blur legibility device rather than inventing new overlay chrome. Multi-photo pages show prev/next/play/counter; single-photo pages hide all four but close. Focus-trapped to the credit link plus the four controls in DOM order; the scrim button is excluded from tab order; the rest of the page is marked inert while open; focus returns to the triggering thumbnail on close.",
+      "html": "<div class=\"ds-lightbox\" role=\"dialog\" aria-modal=\"true\" aria-label=\"Photo viewer\"><button class=\"ds-lightbox__scrim\" type=\"button\" tabindex=\"-1\" aria-label=\"Close photo viewer\"></button><figure class=\"ds-lightbox__figure\"><img class=\"ds-lightbox__img\" src=\"#\" alt=\"\" /><figcaption class=\"ds-lightbox__caption\"><span class=\"ds-lightbox__credit\">Photo: <a href=\"#\">Jennifer Trovato</a></span><span class=\"ds-lightbox__count\">2 / 5</span></figcaption></figure><button class=\"ds-lightbox__ctrl ds-lightbox__close\" type=\"button\" aria-label=\"Close\"><svg class=\"ds-lightbox__icon\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M5 5L15 15M15 5L5 15\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" /></svg></button><button class=\"ds-lightbox__ctrl ds-lightbox__prev\" type=\"button\" aria-label=\"Previous photo\"><svg class=\"ds-lightbox__icon\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M12 4L6 10L12 16\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></svg></button><button class=\"ds-lightbox__ctrl ds-lightbox__next\" type=\"button\" aria-label=\"Next photo\"><svg class=\"ds-lightbox__icon\" viewBox=\"0 0 20 20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M8 4L14 10L8 16\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /></svg></button><button class=\"ds-lightbox__ctrl ds-lightbox__play\" type=\"button\" aria-label=\"Play slideshow\">Play slideshow</button></div>",
+      "css": ".ds-lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; } .ds-lightbox__scrim { position: absolute; inset: 0; background: #0c0b08; border: none; padding: 0; cursor: zoom-out; } .ds-lightbox__figure { position: relative; z-index: 1; margin: 0; max-width: min(92vw, 1300px); max-height: 84vh; display: flex; flex-direction: column; align-items: center; pointer-events: none; } .ds-lightbox__img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; } .ds-lightbox__caption { margin-top: 0.9rem; display: flex; align-items: center; gap: 1rem; color: #f6f4ee; opacity: 0.85; font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; } .ds-lightbox__credit a { color: #f6f4ee; text-decoration: underline; text-decoration-color: rgba(246,244,238,0.4); } .ds-lightbox__credit a:hover { text-decoration-color: #f6f4ee; } .ds-lightbox__ctrl { font-family: 'IBM Plex Mono', monospace; background: rgba(20,19,15,0.55); backdrop-filter: blur(2px); border: none; border-radius: 2px; color: #f6f4ee; opacity: 0.85; cursor: pointer; padding: 0.55rem; } .ds-lightbox__ctrl:hover, .ds-lightbox__ctrl:focus-visible { opacity: 1; } .ds-lightbox__ctrl:focus-visible { outline: 2px solid #94a4dd; outline-offset: 2px; } .ds-lightbox__close { position: absolute; top: 1.2rem; right: 1.4rem; z-index: 2; } .ds-lightbox__prev { position: absolute; top: 50%; left: 0.6rem; translate: 0 -50%; z-index: 2; padding: 0.7rem 0.85rem; } .ds-lightbox__next { position: absolute; top: 50%; right: 0.6rem; translate: 0 -50%; z-index: 2; padding: 0.7rem 0.85rem; } .ds-lightbox__play { position: absolute; bottom: 1.3rem; left: 50%; translate: -50% 0; z-index: 2; font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5rem 0.9rem; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Standing Convention, Photo-Led",
+    "overview": "Beautiful Blog remains a conventional blog done well, on purpose — no concept metaphor, no card chrome, no ornamental system beyond hairline rules and type. This build extends that same world to carry photography as the primary content rather than text: home is now a masonry grid of photo covers, and every post leads with its image(s) before its writing. The extension took the 'extend an existing surface' path explicitly — same palette, same three-role type system, same flat/hairline elevation model — with only the composition changing to put the photo first and the caption second. The system stays deliberately under-designed relative to a typical photo-blog theme within the flowing page itself: no rounded image corners, no drop shadows or card frames around photos there. A photo's own edge is its only boundary in that layer. The one addition earned by the photo grid is a small dark overlay badge for multi-photo entries ('N photos') — the system's only pill-shaped element — and a wider container (.container-wide, 1180px) that photos and chrome-bearing sections now use, alongside the original narrow .container (760px) reserved for reading text. A click-to-fullscreen photo viewer (Lightbox.astro) sits one interactive layer above the flat page: it opens any clicked photo full-viewport over a solid, theme-invariant near-black scrim (--lightbox-bg: #0c0b08), with prev/next and, on multi-photo pages, a slideshow toggle; its controls are authored SVG icons on the same --scrim/blur legibility chip the multi-photo badge already uses, so the overlay reuses an existing chrome device rather than inventing one. This build went through two finish-review rounds. The first (photo-grid extension) had three corrections, all reflected in the shipped state: a caption-alignment bug on the home grid (wrapped titles orphaning date/tag beside only the first line) was fixed by stacking title above meta rather than a baseline-aligned row; a credit-caption alignment inconsistency between the post page (was right-aligned) and About (left-aligned) was standardized to left-aligned everywhere; and post-page photo widths were widened from 900px/560px to 1100px/640px (landscape/portrait). A follow-up fix promoted the badge's overlay colors from hardcoded literals into two intentionally theme-invariant tokens, --scrim and --scrim-text, declared once in :root and left out of the dark-theme override block on purpose. The second round (lightbox feature) corrected Unicode glyph icons to authored SVGs, added the missing scrim/blur backdrop behind lightbox controls, fixed a Space-key handler that hijacked native button activation, excluded the scrim button from the focus trap, and marked the rest of the page inert while the dialog is open. Final verdict on both rounds was ship.",
+    "keyCharacteristics": [
+      "Warm paper ground, near-black ink, single reserved ink-blue accent — unchanged from the text-blog era, no new hues introduced for photography",
+      "Fraunces (display) / Newsreader (body) / IBM Plex Mono (meta only) — same three-role, no-overlap type system",
+      "Home is a column-count masonry grid of photo covers; no card chrome — the photo's own edge is the only boundary",
+      "Every entry caption stacks title above meta (never a baseline row), and every photo credit caption is left-aligned, mono, ink-faint",
+      "Two container widths now in active use: .container (760px, reading text) and .container-wide (1180px, photo grid, masthead, footer, full-width post photos)"
+    ],
+    "rules": [
+      {
+        "name": "The One Accent Rule",
+        "body": "Ink-blue appears only on links, the mono tag label, and photo-credit hover. It never appears as a background, a button fill, a photo border, or a badge fill. Its scarcity is what makes it read as a considered edit rather than a default link-blue.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Gray-Palette Rule",
+        "body": "All neutral steps (paper-raised, rule, rule-soft) are derived from the two anchor hues (paper, ink) via opacity or a single adjacent warm value — never introduced as an unrelated gray scale.",
+        "section": "colors"
+      },
+      {
+        "name": "The Byline-Not-Kicker Rule",
+        "body": "Date and tag metadata sit directly beneath the element they describe — heading or grid-item title — styled small and quiet. They never sit above as a preceding kicker/eyebrow line. On the home grid this now also means: title always renders first on its own line(s), meta stacks directly beneath as a second row, never sharing a baseline with a wrapped multi-line title.",
+        "section": "typography"
+      },
+      {
+        "name": "The Three-Role Rule",
+        "body": "Fraunces is headings/titles only, Newsreader is reading body only, IBM Plex Mono is metadata/credits/badges only. No role borrows another's typeface, and no fourth typeface is introduced.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow, No-Card Rule",
+        "body": "Nothing in this system is elevated, including photos. A photo sits directly on the page with no frame, border, or shadow beyond its own edge; separation between grid items, photos in a photo essay, or page sections is achieved only through whitespace and the hairline rule.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Constant-Overlay Rule",
+        "body": "--scrim, --scrim-text, and --lightbox-bg are the deliberate exceptions to theme-tracking: overlay chrome painted on top of a photo (the multi-photo count badge, the lightbox's control chips and scrim) stays a fixed dark-on-light pair in both themes, because it reads against the photo's own pixels, not against --paper. No other token gets this exemption — a token only qualifies if it sits on photo content, not page background.",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do keep the accent (#2f3f74 / #94a4dd) confined to links, the .tag label, and photo-credit hover — never a photo border, badge fill, or grid-item background.",
+      "Do stack a grid item's title above its meta row, never side-by-side, so a wrapped multi-line title never orphans its date/tag beside only the first line.",
+      "Do left-align every photo-credit caption ('Photo: {credit}'), on every page, directly beneath the photo it describes.",
+      "Do use .container-wide (1180px) for photo grids, full-width post photos, masthead, and footer; keep .container (760px) and --measure (36.5em) for reading text only.",
+      "Do hold post-page photos to 1100px landscape / 640px portrait max width, centered in .container-wide.",
+      "Do use the hairline rule (1px solid var(--rule)) as the only divider device between sections, list entries, and grid rows.",
+      "Do keep Fraunces to headings/titles, Newsreader to body prose, and IBM Plex Mono to dates/tags/nav/credits/badge — no crossover."
+    ],
+    "donts": [
+      "Don't add cards, shadows, borders, or rounded corners around photos — a photo's own edge is its only boundary; even the frame's overflow: hidden crops nothing, it just contains.",
+      "Don't reintroduce a kicker/eyebrow (tag or date set above a heading or title) anywhere, including the photo grid — meta always trails and stacks beneath the text it describes.",
+      "Don't add a second accent color or expand the accent's role beyond links, the .tag label, and credit-link hover.",
+      "Don't widen the reading measure back toward 40em; 36.5em is the corrected, shipped value for text content.",
+      "Don't introduce a concept metaphor (card catalog, notebook, corkboard, gallery-chrome) into the flowing page's layout or component styling — this extension explicitly took the 'extend an existing surface' path, not a new concept tournament. The fullscreen lightbox is the one sanctioned exception: interaction chrome for an overlay layer outside the flowing page, built from the system's own existing overlay device (--scrim/blur), not a new concept.",
+      "Don't use Unicode glyphs or emoji as icons anywhere, including inside the lightbox — author flat SVG line icons in one consistent stroke weight.",
+      "Don't right-align, overlay, or omit a photo's credit caption — left-aligned 'Photo: {credit}' beneath the image is the one standardized pattern after the post/About inconsistency was corrected."
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+---
+title: "A Door That's Seen Better Days"
+excerpt: "Paint gone, hinges rusted, still doing its job."
+date: 2026-06-27
+tag: "Travel"
+photos:
+  - src: "/photos/26-78.jpg"
+    alt: "An old, weathered wooden door on a stone building with peeling paint."
+    orientation: portrait
+    credit: "Paul Evans"
+    creditUrl: "https://unsplash.com/photos/CtkDsu4w-Rs"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+No idea what's behind it. Didn't try the handle. Some doors are better left as photographs.

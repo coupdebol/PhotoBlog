@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import PhotoGridItem from '../components/PhotoGridItem.astro';
+import Footer from '../components/Footer.astro';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout
+  title="Beautiful Blog"
+  description="A personal photography journal — photos and short notes, posted as they're taken."
+>
+  <Header />
+
+  <main>
+    <section class="hero container-wide">
+      <h1>Photos, kept in order.</h1>
+      <p class="hero__dek">
+        A running photo journal — a frame or two at a time, with a short note alongside each.
+      </p>
+    </section>
+
+    <section class="grid container-wide" aria-label="All entries">
+      {
+        posts.map((post) => (
+          <PhotoGridItem
+            href={`/posts/${post.id}/`}
+            title={post.data.title}
+            date={post.data.date}
+            tag={post.data.tag}
+            photoCount={post.data.photos.length}
+            cover={post.data.photos[0]}
+          />
+        ))
+      }
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding-block: 2.6rem 2rem;
+    max-width: 34rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.9rem, 4vw, 2.5rem);
+    margin-bottom: 0.7rem;
+  }
+
+  .hero__dek {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    margin: 0;
+  }
+
+  .grid {
+    padding-block: 0.6rem 4rem;
+    column-count: 1;
+    column-gap: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      column-count: 2;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .grid {
+      column-count: 3;
+    }
+  }
+</style>

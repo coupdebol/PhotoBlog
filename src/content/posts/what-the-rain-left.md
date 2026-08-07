@@ -1,0 +1,23 @@
+---
+title: "What the Rain Left"
+excerpt: "A short walk after three days of rain, up a trail I'd normally skip in the dry season."
+date: 2025-10-20
+tag: "Landscape"
+photos:
+  - src: "/photos/06-15.jpg"
+    alt: "A waterfall cascading over dark rocks in a forested gorge."
+    orientation: landscape
+    credit: "Paul Jarvis"
+    creditUrl: "https://unsplash.com/photos/NYDo21ssGao"
+  - src: "/photos/10-28.jpg"
+    alt: "A shallow forest stream running over rocks between green banks."
+    orientation: landscape
+    credit: "Jerry Adney"
+    creditUrl: "https://unsplash.com/photos/_WiFMBRT7Aw"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+Three days of rain and the falls actually looked like something. Most of the year this trail is a dry scramble over rock; today it was loud the whole way up.
+
+Lower down, the same water spreads out and goes quiet again. I like that better, honestly — the falls are the photograph everyone takes, the stream after it is the one nobody stops for.

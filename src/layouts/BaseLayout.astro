@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import Lightbox from '../components/Lightbox.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="data:," />
+    <script is:inline>
+      (function () {
+        var saved = localStorage.getItem('theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <!--
+      THESIS: A personal blog is the writing, not a concept wrapped around
+      it — extended for a photography blog: the photo is the writing here,
+      so the same restrained editorial world now serves the image first
+      and the caption second, without inventing a new concept to do it.
+      OWN-WORLD: Warm paper ground, near-black ink, a single reserved
+      ink-blue accent used only for links and small labels. Fraunces for
+      headlines (quiet personality, not loud), Newsreader serif for body
+      reading, IBM Plex Mono only for dates/tags/credits. Hairline rules
+      divide content instead of cards, shadows, or borders; photos carry
+      no frame beyond their own edge.
+      STORY: A visitor understands this is one person's photo journal,
+      arranged chronologically; they scan a grid of covers, open an entry
+      into its full photo (or short photo essay) with a short reflection
+      below, and can see who keeps the journal on About. Any photo opens
+      fullscreen on click, with a slideshow to step through every photo
+      on that page.
+      FIRST VIEWPORT: A plain text masthead (site name, two-link nav,
+      unobtrusive light/dark switch) above a masonry grid of photo covers
+      — image, title, date, tag — no card chrome, the photo's own edge is
+      the only boundary.
+      FORM: Canon/standing-exit world (Stripe Press / Stratechery
+      register), extended rather than replaced: this is the "extend an
+      existing surface" path — same tokens, new composition for image-led
+      content, no new concept tournament run for a structural adaptation.
+      FINISH: unreviewed and undocumented is unfinished; this build ends
+      with the finish review, the verdict, and DESIGN.md.
+    -->
+    <slot />
+    <Lightbox />
+  </body>
+</html>

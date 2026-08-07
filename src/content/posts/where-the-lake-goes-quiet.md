@@ -1,0 +1,16 @@
+---
+title: "Where the Lake Goes Quiet"
+excerpt: "Last light, no wind, and a dock that made the whole thing feel staged even though it wasn't."
+date: 2026-05-26
+tag: "Landscape"
+photos:
+  - src: "/photos/24-71.jpg"
+    alt: "A calm lake at sunset with a wooden dock structure silhouetted against the sky."
+    orientation: landscape
+    credit: "Jon Eckert"
+    creditUrl: "https://unsplash.com/photos/IoIbdFdGCnQ"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+Some evenings the lake does this on its own and you just have to be standing there with a camera instead of packing up early, which is usually what I'm doing instead.

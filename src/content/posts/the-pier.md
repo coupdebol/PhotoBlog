@@ -1,0 +1,16 @@
+---
+title: "The Pier"
+excerpt: "Long exposure, longer wait for the water to cooperate."
+date: 2026-05-11
+tag: "Travel"
+photos:
+  - src: "/photos/23-68.jpg"
+    alt: "A pier extending into calm water, shot in black and white with light posts along its length."
+    orientation: landscape
+    credit: "Cristian Moscoso"
+    creditUrl: "https://unsplash.com/photos/2SfRAWkinpU"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+Ten minutes of nothing, then the water flattened out for about ninety seconds. This is somewhere in the middle of that window.

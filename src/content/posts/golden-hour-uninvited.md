@@ -1,0 +1,16 @@
+---
+title: "Golden Hour, Uninvited"
+excerpt: "She wasn't posing. The light just happened to be doing something worth stopping for."
+date: 2026-04-25
+tag: "Portrait"
+photos:
+  - src: "/photos/22-65.jpg"
+    alt: "A woman standing in a golden, sunlit field with her hair backlit by the sun."
+    orientation: landscape
+    credit: "Alexander Shustov"
+    creditUrl: "https://unsplash.com/photos/2FrX56QL7P8"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+Asked after, not before, which is generally the right order for this kind of photo. Got a yes and thirty more seconds of the same light before it moved on.

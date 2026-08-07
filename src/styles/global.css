@@ -1,0 +1,148 @@
+@import '@fontsource/fraunces/500.css';
+@import '@fontsource/fraunces/600.css';
+@import '@fontsource/fraunces/600-italic.css';
+@import '@fontsource/newsreader/400.css';
+@import '@fontsource/newsreader/400-italic.css';
+@import '@fontsource/newsreader/500.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+:root {
+  color-scheme: light;
+
+  --paper: #f6f4ee;
+  --ink: #1c1b17;
+  --ink-soft: #55524a;
+  --ink-faint: #666257;
+  --rule: rgba(28, 27, 23, 0.14);
+  --rule-soft: rgba(28, 27, 23, 0.08);
+
+  --accent: #2f3f74;
+  --accent-soft: #2f3f7414;
+
+  /* Overlays sit on top of photos, not page chrome, so they intentionally
+     do not flip with the light/dark theme like every other token here. */
+  --scrim: rgba(20, 19, 15, 0.55);
+  --scrim-text: #f6f4ee;
+  --lightbox-bg: #0c0b08;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --measure: 36.5em;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --paper: #171611;
+  --ink: #ece7d9;
+  --ink-soft: #b7b1a0;
+  --ink-faint: #a89f8c;
+  --rule: rgba(236, 231, 217, 0.14);
+  --rule-soft: rgba(236, 231, 217, 0.08);
+  --accent: #94a4dd;
+  --accent-soft: #94a4dd1f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+    --paper: #171611;
+      --ink: #ece7d9;
+    --ink-soft: #b7b1a0;
+    --ink-faint: #a89f8c;
+    --rule: rgba(236, 231, 217, 0.14);
+    --rule-soft: rgba(236, 231, 217, 0.08);
+    --accent: #94a4dd;
+    --accent-soft: #94a4dd1f;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.container {
+  width: min(760px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+.container-wide {
+  width: min(1180px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+hr,
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

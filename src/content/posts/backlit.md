@@ -1,0 +1,16 @@
+---
+title: "Backlit"
+excerpt: "Bare branches, low winter sun, and a lens that isn't really built for this."
+date: 2025-11-20
+tag: "Nature"
+photos:
+  - src: "/photos/09-25.jpg"
+    alt: "Bare tree branches silhouetted against a bright, hazy winter sun."
+    orientation: landscape
+    credit: "Alejandro Escamilla"
+    creditUrl: "https://unsplash.com/photos/Iuq0EL4EINY"
+---
+
+*[Sample entry — a placeholder written to show off the layout, not a real post. Photos are demo imagery, not the blog owner's own work.]*
+
+The sun was too low and too bright for the lens I had on, which is usually a mistake and occasionally exactly what a photo needed. This one's in the second pile.

@@ -1,0 +1,341 @@
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+  <button class="lightbox__scrim" type="button" tabindex="-1" aria-label="Close photo viewer" data-action="close"></button>
+
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" />
+    <figcaption class="lightbox__caption">
+      <span class="lightbox__credit meta"></span>
+      <span class="lightbox__count meta"></span>
+    </figcaption>
+  </figure>
+
+  <button class="lightbox__ctrl lightbox__close" type="button" aria-label="Close" data-action="close">
+    <svg class="lightbox__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+  </button>
+  <button class="lightbox__ctrl lightbox__prev" type="button" aria-label="Previous photo" data-action="prev">
+    <svg class="lightbox__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M12 4L6 10L12 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <button class="lightbox__ctrl lightbox__next" type="button" aria-label="Next photo" data-action="next">
+    <svg class="lightbox__icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M8 4L14 10L8 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </button>
+  <button class="lightbox__ctrl lightbox__play" type="button" aria-label="Play slideshow" data-action="play">
+    <span data-state="play">Play slideshow</span>
+    <span data-state="pause">Pause slideshow</span>
+  </button>
+</div>
+
+<style>
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox[hidden] {
+    display: none;
+  }
+
+  .lightbox__scrim {
+    position: absolute;
+    inset: 0;
+    background: var(--lightbox-bg);
+    border: none;
+    padding: 0;
+    cursor: zoom-out;
+  }
+
+  .lightbox__figure {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: min(92vw, 1300px);
+    max-height: 84vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .lightbox__img {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    display: block;
+  }
+
+  .lightbox__caption {
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--scrim-text);
+    opacity: 0.85;
+  }
+
+  .lightbox__credit {
+    pointer-events: auto;
+  }
+
+  .lightbox__credit :global(a) {
+    color: var(--scrim-text);
+    text-decoration: underline;
+    text-decoration-color: rgba(246, 244, 238, 0.4);
+    text-underline-offset: 2px;
+  }
+
+  .lightbox__credit :global(a:hover) {
+    text-decoration-color: var(--scrim-text);
+  }
+
+  .lightbox__ctrl {
+    font-family: var(--font-mono);
+    background: var(--scrim);
+    backdrop-filter: blur(2px);
+    border: none;
+    border-radius: 2px;
+    color: var(--scrim-text);
+    opacity: 0.85;
+    cursor: pointer;
+  }
+
+  .lightbox__ctrl:hover {
+    opacity: 1;
+  }
+
+  .lightbox__icon {
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .lightbox__close {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.4rem;
+    z-index: 2;
+    padding: 0.55rem;
+  }
+
+  .lightbox__prev,
+  .lightbox__next {
+    position: absolute;
+    top: 50%;
+    translate: 0 -50%;
+    z-index: 2;
+    padding: 0.7rem 0.85rem;
+  }
+
+  .lightbox__prev {
+    left: 0.6rem;
+  }
+
+  .lightbox__next {
+    right: 0.6rem;
+  }
+
+  .lightbox__play {
+    position: absolute;
+    bottom: 1.3rem;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 2;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.5rem 0.9rem;
+  }
+
+  .lightbox__play [data-state='pause'] {
+    display: none;
+  }
+
+  .lightbox.is-playing .lightbox__play [data-state='play'] {
+    display: none;
+  }
+
+  .lightbox.is-playing .lightbox__play [data-state='pause'] {
+    display: inline;
+  }
+
+  .lightbox[data-single='true'] .lightbox__prev,
+  .lightbox[data-single='true'] .lightbox__next,
+  .lightbox[data-single='true'] .lightbox__play,
+  .lightbox[data-single='true'] .lightbox__count {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox__prev,
+    .lightbox__next {
+      padding: 0.6rem 0.7rem;
+    }
+
+    .lightbox__caption {
+      flex-direction: column;
+      gap: 0.3rem;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  type Slide = { src: string; alt: string; credit: string; creditUrl: string };
+
+  const lightbox = document.getElementById('lightbox') as HTMLElement | null;
+  if (lightbox) {
+    const imgEl = lightbox.querySelector('.lightbox__img') as HTMLImageElement;
+    const creditEl = lightbox.querySelector('.lightbox__credit') as HTMLElement;
+    const countEl = lightbox.querySelector('.lightbox__count') as HTMLElement;
+    const playBtn = lightbox.querySelector('.lightbox__play') as HTMLButtonElement;
+
+    const triggers = Array.from(
+      document.querySelectorAll<HTMLImageElement>('img.lightbox-trigger')
+    );
+    const slides: Slide[] = triggers.map((el) => ({
+      src: el.currentSrc || el.src,
+      alt: el.alt,
+      credit: el.dataset.credit || '',
+      creditUrl: el.dataset.creditUrl || '',
+    }));
+
+    lightbox.dataset.single = String(slides.length <= 1);
+
+    let index = 0;
+    let playing = false;
+    let timer: number | null = null;
+    let lastFocused: HTMLElement | null = null;
+
+    function render() {
+      const s = slides[index];
+      if (!s) return;
+      imgEl.src = s.src;
+      imgEl.alt = s.alt;
+      creditEl.innerHTML = s.credit
+        ? `Photo: <a href="${s.creditUrl}" target="_blank" rel="noopener noreferrer">${s.credit}</a>`
+        : '';
+      countEl.textContent = `${index + 1} / ${slides.length}`;
+    }
+
+    function stopPlaying() {
+      playing = false;
+      lightbox!.classList.remove('is-playing');
+      if (timer !== null) {
+        window.clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    function startPlaying() {
+      if (slides.length <= 1) return;
+      playing = true;
+      lightbox!.classList.add('is-playing');
+      timer = window.setInterval(() => {
+        index = (index + 1) % slides.length;
+        render();
+      }, 3800);
+    }
+
+    const siblings = Array.from(document.body.children).filter(
+      (el) => el !== lightbox
+    ) as HTMLElement[];
+
+    function open(i: number, trigger: HTMLElement) {
+      lastFocused = trigger;
+      index = i;
+      render();
+      lightbox!.hidden = false;
+      document.body.style.overflow = 'hidden';
+      siblings.forEach((el) => el.setAttribute('inert', ''));
+      lightbox!.querySelector<HTMLButtonElement>('.lightbox__close')?.focus();
+    }
+
+    function close() {
+      stopPlaying();
+      lightbox!.hidden = true;
+      document.body.style.overflow = '';
+      siblings.forEach((el) => el.removeAttribute('inert'));
+      lastFocused?.focus();
+    }
+
+    function prev() {
+      stopPlaying();
+      index = (index - 1 + slides.length) % slides.length;
+      render();
+    }
+
+    function next() {
+      stopPlaying();
+      index = (index + 1) % slides.length;
+      render();
+    }
+
+    triggers.forEach((el, i) => {
+      el.style.cursor = 'zoom-in';
+      el.tabIndex = 0;
+      el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', `View "${el.alt}" fullscreen`);
+      el.addEventListener('click', () => open(i, el));
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(i, el);
+        }
+      });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      const action = (e.target as HTMLElement).closest<HTMLElement>('[data-action]')?.dataset
+        .action;
+      if (action === 'close') close();
+      if (action === 'prev') prev();
+      if (action === 'next') next();
+      if (action === 'play') (playing ? stopPlaying() : startPlaying());
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (lightbox!.hidden) return;
+      const active = document.activeElement;
+      const focusedIsCtrl = active instanceof HTMLElement && active.classList.contains('lightbox__ctrl');
+
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'ArrowRight') next();
+      else if (e.key === ' ' && slides.length > 1 && !focusedIsCtrl) {
+        // Only hijack Space as a global shortcut when focus isn't on one of
+        // the dialog's own buttons — those already activate on Space/Enter
+        // natively, and intercepting it here would break that.
+        e.preventDefault();
+        playing ? stopPlaying() : startPlaying();
+      } else if (e.key === 'Tab') {
+        // The scrim is excluded on purpose (tabindex="-1" in the template) —
+        // it's a full-viewport invisible target and a confusing tab stop.
+        // The credit link is a real, meaningful destination (photographer
+        // attribution) and must stay reachable, so it's tracked here too,
+        // in true DOM order, alongside the four control buttons.
+        const focusable = Array.from(
+          lightbox!.querySelectorAll<HTMLElement>('.lightbox__credit a, .lightbox__ctrl:not([hidden])')
+        ).filter((b) => b.offsetParent !== null);
+        if (focusable.length === 0) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+</script>

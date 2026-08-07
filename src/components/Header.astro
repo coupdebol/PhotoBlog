@@ -1,0 +1,124 @@
+---
+const links = [
+  { href: '/', label: 'Index' },
+  { href: '/about/', label: 'About' },
+];
+const current = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="container-wide header__inner">
+    <a class="header__mark" href="/">Beautiful Blog</a>
+
+    <nav class="header__nav" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a href={link.href} aria-current={current === link.href ? 'page' : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+      <button id="theme-toggle" type="button" aria-pressed="false">
+        <span data-face="light">Dark</span>
+        <span data-face="dark">Light</span>
+      </button>
+    </nav>
+  </div>
+  <div class="container-wide">
+    <div class="rule"></div>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding-block: 1.6rem 0;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    padding-bottom: 1.4rem;
+  }
+
+  .header__mark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    text-decoration: none;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+
+  .header__nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+  }
+
+  .header__nav a:hover,
+  .header__nav a[aria-current='page'] {
+    color: var(--ink);
+  }
+
+  .header__nav button {
+    font-family: inherit;
+    font-size: inherit;
+    letter-spacing: inherit;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    color: var(--ink-soft);
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+  }
+
+  .header__nav button:hover {
+    color: var(--ink);
+    border-color: var(--ink-faint);
+  }
+
+  [data-face='dark'] {
+    display: none;
+  }
+
+  :root[data-theme='dark'] [data-face='light'] {
+    display: none;
+  }
+  :root[data-theme='dark'] [data-face='dark'] {
+    display: inline;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  function currentTheme(): 'light' | 'dark' {
+    const attr = root.getAttribute('data-theme');
+    if (attr === 'dark' || attr === 'light') return attr;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function apply(theme: 'light' | 'dark') {
+    root.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    toggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+  }
+
+  apply(currentTheme());
+
+  toggle?.addEventListener('click', () => {
+    apply(currentTheme() === 'dark' ? 'light' : 'dark');
+  });
+</script>
