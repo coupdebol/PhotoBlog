@@ -8,7 +8,7 @@ A practical guide for adding and editing content on the site — no framework kn
 
 - **Preview locally:** `npm run dev`, then open the URL it prints. Every save updates the page automatically.
 - **Where things live:**
-  - `src/content/posts/` — one Markdown file per entry (a post)
+  - `src/content/posts/` — one `.mdx` file per entry (a post)
   - `public/photos/` — every photo file, referenced from posts by path
   - `src/pages/about/index.astro` — the About page
   - `src/components/Header.astro` — the site's nav links
@@ -18,7 +18,7 @@ A practical guide for adding and editing content on the site — no framework kn
 
 ## 1. Adding a new page (a photo entry)
 
-Every entry on the site — what shows up in the home grid — is one Markdown file in `src/content/posts/`.
+Every entry on the site — what shows up in the home grid — is one `.mdx` file in `src/content/posts/`. `.mdx` is Markdown with one extra ability: you can drop in a `<Photo />` tag anywhere in your writing, which is how photos and text get mixed together.
 
 ### Step 1: Add your photo(s)
 
@@ -28,13 +28,13 @@ A sensible size to export at: **around 1400px on the long edge for landscape pho
 
 ### Step 2: Create the entry file
 
-Create a new file: `src/content/posts/your-entry-slug.md`
+Create a new file: `src/content/posts/your-entry-slug.mdx`
 
-The filename (the "slug") becomes the URL — `a-walk-worth-writing-down.md` becomes `/posts/a-walk-worth-writing-down/`. Use lowercase words separated by hyphens, no spaces or punctuation.
+The filename (the "slug") becomes the URL — `a-walk-worth-writing-down.mdx` becomes `/posts/a-walk-worth-writing-down/`. Use lowercase words separated by hyphens, no spaces or punctuation.
 
 ### Step 3: Fill in the frontmatter
 
-Every entry starts with a frontmatter block (between the `---` lines) followed by your writing. Here's the template:
+Every entry starts with a frontmatter block (between the `---` lines). Unlike the photos themselves, this block only needs to describe the **cover photo** — the one representative image shown on the home grid tile. Here's the template:
 
 ```markdown
 ---
@@ -42,15 +42,13 @@ title: "A Walk Worth Writing Down"
 excerpt: "Nothing happened, which is exactly why I wanted to write it down."
 date: 2026-08-07
 tag: "Field Log"
-photos:
-  - src: "/photos/your-photo.jpg"
-    alt: "A short, literal description of what's in the photo."
-    orientation: landscape
-    credit: "Your Name"
-    creditUrl: "https://your-site-or-portfolio.example"
+cover:
+  src: "/photos/your-photo.jpg"
+  alt: "A short, literal description of what's in the photo."
+  orientation: landscape
 ---
 
-Your writing goes here, in ordinary paragraphs.
+Your writing and photos go here — see Step 4.
 ```
 
 **Field by field:**
@@ -61,40 +59,98 @@ Your writing goes here, in ordinary paragraphs.
 | `excerpt` | Currently unused on-page (a holdover field), but keep it filled in — it's a short one-line summary, good for your own reference and for if it's wired into an RSS feed or search later. |
 | `date` | Controls sort order — entries show newest-first everywhere. Format: `YYYY-MM-DD`. |
 | `tag` | A short category label, shown next to the date (e.g. `Landscape`, `Portrait`, `Travel`, `Details`). Free text — reuse existing tags to keep the vocabulary small, or introduce a new one; there's no fixed list to register it in. |
-| `photos` | A list of one or more photos (see below). |
+| `cover` | The grid-tile photo: `src`, `alt`, and `orientation` (`landscape` or `portrait`). This should match whichever photo you consider the entry's lead image — normally the first one in your writing (see Step 4). |
 | `draft` | Optional. Add `draft: true` to keep an entry out of the site while you're still working on it — it won't build/show anywhere until you remove that line or set it to `false`. |
 
-### Step 4: The `photos` list
+### Step 4: Write your entry — text and photos, in any order
 
-Each photo needs five things:
+Everything below the closing `---` is a mix of ordinary Markdown paragraphs and `<Photo />` tags, in whatever order you want them to appear:
+
+```mdx
+A short line to open with.
+
+<Photo
+  src="/photos/your-photo.jpg"
+  alt="A short, literal description of what's in the photo."
+  orientation="landscape"
+  credit="Your Name"
+  creditUrl="https://your-site-or-portfolio.example"
+/>
+
+A paragraph about that photo, or about anything else. Leave a
+blank line between paragraphs — that's what starts a new one.
+
+<Photo
+  src="/photos/another-photo.jpg"
+  alt="Another literal description."
+  orientation="portrait"
+  credit="Your Name"
+  creditUrl="https://your-site-or-portfolio.example"
+  caption="A small line shown right under this photo, in the fullscreen view too."
+/>
+
+A closing paragraph.
+```
+
+**Every `<Photo />` needs five things**, written as `name="value"`:
 
 - **`src`** — the path, always starting with `/photos/` and matching the filename you put in `public/photos/`.
 - **`alt`** — a plain description of what's in the photo, for screen readers and search engines. Describe the content, not your feelings about it ("A pier extending into calm water at dusk," not "A peaceful evening").
 - **`orientation`** — `landscape` or `portrait`, matching the actual shape of the image. This controls how wide the photo displays on the entry page and in the fullscreen viewer, so get it right.
 - **`credit`** — whoever took the photo. For your own work, your own name.
-- **`creditUrl`** — a link that goes with the credit. For your own photos, link to your own site, portfolio, or Instagram — anywhere that makes sense. This field is required and must be a real URL (even if it just points back to your own About page or homepage).
+- **`creditUrl`** — a link that goes with the credit. For your own photos, link to your own site, portfolio, or Instagram — anywhere that makes sense. This must be a real URL (even if it just points back to your own About page or homepage).
 
-**Order matters:** photos display in exactly the order you list them, top to bottom. The **first photo in the list is also the cover image** shown on the home grid tile, so put your strongest single image first.
+**One optional sixth thing:**
 
-One photo makes a normal entry. Two or more make a "photo essay" — the home grid tile automatically shows a small "N photos" badge, and all of them are viewable in the fullscreen slideshow.
+- **`caption`** — a short line of description or commentary shown directly under that photo, and also shown in the fullscreen viewer when someone clicks through. Leave it off entirely if a photo doesn't need one — most won't. It's for a quick note ("Midday, no plan beyond being outside"), not a full paragraph; use ordinary body text before/after the photo for anything longer.
 
-### Step 5: Write the text
+**Order is simply the order you write things in** — photos and paragraphs render top to bottom exactly as they appear in the file. Put a paragraph between two photos, or two photos back to back with nothing between them, however suits the entry.
 
-Everything below the closing `---` is your writing, in plain Markdown:
+A `<Photo />` tag is self-contained: always close it with `/>` at the end, and always keep a blank line before and after it, same as a paragraph.
 
-```markdown
-First paragraph. Leave a blank line between paragraphs — that's
-what starts a new one.
-
-Second paragraph.
-
-- Bullet points work too
-- Like this
-```
-
-**Important layout fact:** all the photos in your `photos` list render first, as a block, followed by all of your writing below them. There's currently no way to place a paragraph *between* two photos, or a photo in the middle of your text — text always comes after every photo. If you want that later, it's a small template change, not something you can do from the content file alone — just ask.
+One photo makes a normal entry. Two or more make a "photo essay" — the home grid tile automatically shows a small "N photos" badge, and all of them are viewable in the fullscreen slideshow, in the order they appear in the file.
 
 That's it — save the file, and the entry appears on the home grid automatically (no other file needs updating).
+
+### A worked example
+
+```mdx
+---
+title: "What the Rain Left"
+excerpt: "A short walk after three days of rain."
+date: 2026-08-07
+tag: "Landscape"
+cover:
+  src: "/photos/waterfall.jpg"
+  alt: "A waterfall cascading over dark rocks in a forested gorge."
+  orientation: landscape
+---
+
+Three days of rain and the falls actually looked like something.
+
+<Photo
+  src="/photos/waterfall.jpg"
+  alt="A waterfall cascading over dark rocks in a forested gorge."
+  orientation="landscape"
+  credit="Your Name"
+  creditUrl="https://your-site.example"
+  caption="Loud the whole way up, for once."
+/>
+
+Lower down, the same water spreads out and goes quiet again.
+
+<Photo
+  src="/photos/stream.jpg"
+  alt="A shallow forest stream running over rocks."
+  orientation="landscape"
+  credit="Your Name"
+  creditUrl="https://your-site.example"
+/>
+
+I like that better, honestly.
+```
+
+This produces: an opening line, the waterfall photo (with its small caption), a paragraph, the stream photo (no caption — that's fine), then a closing line.
 
 ---
 
@@ -155,7 +211,7 @@ const portrait = {
 };
 ```
 
-Replace all four values the same way you would for a post photo (see §1, Step 4 above) — put your new image in `public/photos/`, update `src` to match, write a real `alt` description, and update `credit`/`creditUrl` to yourself. You can also delete the whole `<figure class="about__portrait">...</figure>` block further down if you'd rather not have a photo on this page at all.
+Replace all four values the same way you would for a post photo (see §1, Step 4 above — same fields, just written as a JS object here instead of a `<Photo />` tag) — put your new image in `public/photos/`, update `src` to match, write a real `alt` description, and update `credit`/`creditUrl` to yourself. You can also delete the whole `<figure class="about__portrait">...</figure>` block further down if you'd rather not have a photo on this page at all.
 
 ### Editing the bio text
 
@@ -179,10 +235,12 @@ Delete this whole `<p>` once you've replaced the demo photos and bio with your o
 
 | I want to... | Do this |
 |---|---|
-| Add a new photo entry | New file in `src/content/posts/`, photos in `public/photos/` |
+| Add a new photo entry | New `.mdx` file in `src/content/posts/`, photos in `public/photos/` |
+| Put text between two photos | Just write it between their `<Photo />` tags, in the order you want |
+| Give one photo a small description | Add `caption="..."` to that `<Photo />` tag — it shows on the page and in the fullscreen viewer |
 | Hide an entry temporarily | Add `draft: true` to its frontmatter |
 | Reorder entries | Change the `date` field — sort is always newest-first |
-| Change what's on the home tile | Edit `title`, `tag`, or reorder `photos` (first = cover) |
+| Change what's on the home tile | Edit `title`, `tag`, or the `cover` object in frontmatter |
 | Add a new nav page | New folder in `src/pages/`, then add it to `Header.astro`'s `links` |
 | Edit the bio | `src/pages/about/index.astro`, inside `.about__body` |
 | Preview changes | `npm run dev` |

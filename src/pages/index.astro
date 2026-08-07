@@ -8,6 +8,21 @@ import Footer from '../components/Footer.astro';
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
+
+// The frontmatter no longer lists photos (they're inline <Photo /> tags in
+// the MDX body), so the grid's "N photos" badge is derived by counting them
+// in the raw source. Comments are stripped first so a commented-out tag
+// isn't counted; a post with zero real <Photo /> tags is a genuine
+// authoring bug (every entry needs at least one), so it's surfaced at
+// build time rather than silently coerced to a plausible-looking count.
+function countPhotos(post: (typeof posts)[number]) {
+  const source = (post.body ?? '').replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+  const count = (source.match(/<Photo\b/g) ?? []).length;
+  if (count === 0) {
+    console.warn(`[content] "${post.id}" has no <Photo /> tags in its body — check the entry.`);
+  }
+  return count;
+}
 ---
 
 <BaseLayout
@@ -26,16 +41,19 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(
 
     <section class="grid container-wide" aria-label="All entries">
       {
-        posts.map((post) => (
-          <PhotoGridItem
-            href={`/posts/${post.id}/`}
-            title={post.data.title}
-            date={post.data.date}
-            tag={post.data.tag}
-            photoCount={post.data.photos.length}
-            cover={post.data.photos[0]}
-          />
-        ))
+        posts.map((post) => {
+          const photoCount = countPhotos(post);
+          return (
+            <PhotoGridItem
+              href={`/posts/${post.id}/`}
+              title={post.data.title}
+              date={post.data.date}
+              tag={post.data.tag}
+              photoCount={photoCount}
+              cover={post.data.cover}
+            />
+          );
+        })
       }
     </section>
   </main>

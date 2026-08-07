@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # impeccable design-hook session cache (local tool state, not project content)
 .impeccable/hook.cache.json
+
+# GitHub push credential (local-only, never commit)
+.github_pat

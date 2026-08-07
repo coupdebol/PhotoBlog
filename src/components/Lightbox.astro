@@ -4,8 +4,11 @@
   <figure class="lightbox__figure">
     <img class="lightbox__img" alt="" />
     <figcaption class="lightbox__caption">
-      <span class="lightbox__credit meta"></span>
-      <span class="lightbox__count meta"></span>
+      <span class="lightbox__desc"></span>
+      <span class="lightbox__meta-row">
+        <span class="lightbox__credit meta"></span>
+        <span class="lightbox__count meta"></span>
+      </span>
     </figcaption>
   </figure>
 
@@ -76,9 +79,29 @@
   .lightbox__caption {
     margin-top: 0.9rem;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--scrim-text);
+    text-align: center;
+  }
+
+  .lightbox__desc {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.05rem;
+    max-width: 42rem;
+    opacity: 0.95;
+  }
+
+  .lightbox__desc:empty {
+    display: none;
+  }
+
+  .lightbox__meta-row {
+    display: flex;
     align-items: center;
     gap: 1rem;
-    color: var(--scrim-text);
     opacity: 0.85;
   }
 
@@ -180,20 +203,20 @@
       padding: 0.6rem 0.7rem;
     }
 
-    .lightbox__caption {
-      flex-direction: column;
-      gap: 0.3rem;
-      text-align: center;
+    .lightbox__desc {
+      font-size: 0.95rem;
+      max-width: 88vw;
     }
   }
 </style>
 
 <script>
-  type Slide = { src: string; alt: string; credit: string; creditUrl: string };
+  type Slide = { src: string; alt: string; credit: string; creditUrl: string; caption: string };
 
   const lightbox = document.getElementById('lightbox') as HTMLElement | null;
   if (lightbox) {
     const imgEl = lightbox.querySelector('.lightbox__img') as HTMLImageElement;
+    const descEl = lightbox.querySelector('.lightbox__desc') as HTMLElement;
     const creditEl = lightbox.querySelector('.lightbox__credit') as HTMLElement;
     const countEl = lightbox.querySelector('.lightbox__count') as HTMLElement;
     const playBtn = lightbox.querySelector('.lightbox__play') as HTMLButtonElement;
@@ -206,6 +229,7 @@
       alt: el.alt,
       credit: el.dataset.credit || '',
       creditUrl: el.dataset.creditUrl || '',
+      caption: el.dataset.caption || '',
     }));
 
     lightbox.dataset.single = String(slides.length <= 1);
@@ -220,6 +244,7 @@
       if (!s) return;
       imgEl.src = s.src;
       imgEl.alt = s.alt;
+      descEl.textContent = s.caption;
       creditEl.innerHTML = s.credit
         ? `Photo: <a href="${s.creditUrl}" target="_blank" rel="noopener noreferrer">${s.credit}</a>`
         : '';
