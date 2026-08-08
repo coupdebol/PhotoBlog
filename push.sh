@@ -6,6 +6,8 @@ set -euo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$DIR"
 
+node scripts/check-drafts.mjs
+
 BRANCH="${1:-$(git branch --show-current)}"
 
 git -c credential.helper= \

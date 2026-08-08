@@ -16,7 +16,32 @@ A practical guide for adding and editing content on the site — no framework kn
 
 ---
 
-## 1. Adding a new page (a photo entry)
+## 0. The fast way: `npm run ingest`
+
+If you've already exported a set of photos from Lightroom into one folder, you don't have to do Step 1 by hand. Run:
+
+```
+npm run ingest -- /path/to/your/exported/photos your-post-slug
+```
+
+This does the mechanical parts of Step 1 for you: it copies the photos into `public/photos/`, figures out each photo's orientation from its own file data, picks the first photo (by filename) as the cover, and writes a new `.mdx` file — as a **draft**, so it stays invisible on the site until you're ready.
+
+What it does NOT do — you still write these by hand, same as always:
+- The title, excerpt, and tag
+- Every photo's `alt` text (a real description of what's in it — the ingest tool leaves `"TODO"` as a placeholder)
+- Any captions or the body writing between/around the photos
+
+**Order matters before you run it:** the ingest tool uses filename order to decide both the order photos appear in and which one becomes the cover (whichever sorts first). Rename the files in your export folder first if you want a different order — `1-first.jpg`, `2-second.jpg`, etc. works well.
+
+**Once it's done:** open the new `.mdx` file in `src/content/posts/`, fill in the fields above (see Step 3 for what each one means), and preview with `npm run dev` — same as any other post. When it's ready, remove the `draft: true` line.
+
+**One safety net:** `./push.sh` refuses to push if any post anywhere still has `draft: true` or leftover `"TODO"` alt text — it'll tell you exactly which file and field. This is what stops a half-finished post from accidentally going live.
+
+If the ingest tool errors out (bad slug, an already-used slug, an empty folder, a non-JPEG file in the mix), it explains what's wrong and doesn't touch any files — just fix the folder or the slug and run it again.
+
+---
+
+## 1. Adding a new page (a photo entry) — the manual way
 
 Every entry on the site — what shows up in the home grid — is one `.mdx` file in `src/content/posts/`. `.mdx` is Markdown with one extra ability: you can drop in a `<Photo />` tag anywhere in your writing, which is how photos and text get mixed together.
 
@@ -235,7 +260,8 @@ Delete this whole `<p>` once you've replaced the demo photos and bio with your o
 
 | I want to... | Do this |
 |---|---|
-| Add a new photo entry | New `.mdx` file in `src/content/posts/`, photos in `public/photos/` |
+| Add a new photo entry from a Lightroom export folder | `npm run ingest -- /path/to/folder your-slug` (see §0), then fill in the text by hand |
+| Add a new photo entry from scratch | New `.mdx` file in `src/content/posts/`, photos in `public/photos/` |
 | Put text between two photos | Just write it between their `<Photo />` tags, in the order you want |
 | Give one photo a small description | Add `caption="..."` to that `<Photo />` tag — it shows on the page and in the fullscreen viewer |
 | Hide an entry temporarily | Add `draft: true` to its frontmatter |
